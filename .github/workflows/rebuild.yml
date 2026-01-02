@@ -18,12 +18,12 @@ jobs:
 
     steps:
     - name: checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         ref: ${{ github.event.inputs.branch }}
 
-    - name: setup Java ${{ github.event.inputs.java-version }} 
-      uses: actions/setup-java@v4
+    - name: setup Java ${{ github.event.inputs.java-version }}
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: ${{ github.event.inputs.java-version }}
@@ -37,16 +37,16 @@ jobs:
     - name: build
       run: mvn clean install
 
-    - name: artifact hpikinds
-      uses: actions/upload-artifact@v4
+    - name: artifact-hpi-kinds
+      uses: actions/upload-artifact@v6
       with:
-        name: hpikinds
+        name: upload-artifact
         path: target/confluence-publisher*
 
-    - name: artifact spotbugs xml
-      uses: actions/upload-artifact@v4
+    - name: artifact-spotbugs-xml
+      uses: actions/upload-artifact@v6
       with:
-        name: spotbugs-result
+        name: artifact spotbugs result
         path: target/spotbugsXml.xml
 
     - name: publish spotbugs
